@@ -1,26 +1,28 @@
-let key = 'l';
-let evaluation = 'uneval';
-let userGuess = 'cold';
-let gameSolution = 'load';
+let character = 'o';
+let userGuesses = ['cold', 'fold', 'bath','','','']
+let solution = 'load';
 
-const getStatus = (key, evaluation, userGuess, gameSolution) => {
-    let guess = userGuess.split('');
-    let solution = gameSolution.split('')
-    if (guess.includes(key)) {
-        if (solution.includes(key)) {
-           for (let i = 0; i < guess.length; i++) {
-                if (key === guess[i] && key === solution[i]) {
-                    evaluation = 'correct';
-                } else if (evaluation !== 'correct') {
-                    evaluation = 'present';
+const getStatus = (character) => {
+    let evaluation = 'uneval'
+    let solutionArr = solution.split('')
+    
+    if (userGuesses.toString().split('').includes(character)) {    
+        if (solutionArr.includes(character)) {
+            for (let i = 0; i < userGuesses.length; i++) {
+                let guess = userGuesses[i].split('');
+                for (let j = 0; j < guess.length; j++) {
+                    if (character === guess[j] && character === solutionArr[j]) {
+                        evaluation = 'correct';
+                    } else if (evaluation !== 'correct') {
+                        evaluation = 'present';
+                    }
                 }
             } return evaluation;
-        } else {
+        }
+        else {
             evaluation = 'absent';
         }
     } return evaluation;
 }
 
-console.log(evaluation);
-evaluation = (getStatus(key, evaluation, userGuess, gameSolution));
-console.log(evaluation);
+console.log(getStatus(character));

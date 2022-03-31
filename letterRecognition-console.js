@@ -1,44 +1,46 @@
-let key = 'a';
-let evaluation = 'present';
-let userGuess = 'cold';
-let gameSolution = 'load';
+let character = 'o';
+let userGuesses = ['cold', 'fold', 'bath','','','']
+let solution = 'load';
 
-const getStatus = (key, evaluation, userGuess, gameSolution) => {
-    let guess = userGuess.split('');
-    let solution = gameSolution.split('')
+const getStatus = (character) => {
+    let evaluation = 'uneval'
+    let solutionArr = solution.split('')
 
-    console.log(key+' '+evaluation+' '+guess+' '+solution);
+    console.log(character+' '+evaluation+' '+userGuesses+' '+solutionArr);
     
-    if (guess.includes(key)) {
+    if (userGuesses.toString().split('').includes(character)) {
         console.log('Correct or present or absent');
         
         
-        if (solution.includes(key)) {
+        if (solutionArr.includes(character)) {
             console.log('correct or present');
             
-            for (let i = 0; i < guess.length; i++) {
-                console.log(i);
+            for (let i = 0; i < userGuesses.length; i++) {
 
-                if (key === guess[i] && key === solution[i]) {
-                    console.log('correct '+evaluation+' '+key+' '+guess[i]+' '+solution[i])
-                    evaluation = 'correct';
-                }
-                else if (evaluation !== 'correct') {
-                    console.log('present '+evaluation+' '+key+' '+guess[i]+' '+solution[i])
-                    evaluation = 'present';
+                let guess = userGuesses[i].split('');
+
+                for (let j = 0; j < guess.length; j++) {
+                    console.log(j);
+
+                    if (character === guess[j] && character === solutionArr[j]) {
+                        console.log('correct '+evaluation+' '+character+' '+guess[j]+' '+solutionArr[j])
+                        evaluation = 'correct';
+                    }
+                    else if (evaluation !== 'correct') {
+                        console.log('present '+evaluation+' '+character+' '+guess[j]+' '+solutionArr[j])
+                        evaluation = 'present';
+                    }
                 }
             }
-            console.log(evaluation+' '+key);
+            console.log(evaluation+' '+character);
             return evaluation;
         }
         else {
             evaluation = 'absent';
         }
     }
-    console.log(evaluation+' '+key)
+    console.log(evaluation+' '+character)
     return evaluation;
 }
 
-console.log(evaluation);
-evaluation = (getStatus(key, evaluation, userGuess, gameSolution));
-console.log(evaluation);
+console.log(getStatus(character));
