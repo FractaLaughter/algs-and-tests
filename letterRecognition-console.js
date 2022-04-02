@@ -3,44 +3,31 @@ let userGuesses = ['cold', 'fold', 'bath','','','']
 let solution = 'load';
 
 const getStatus = (character) => {
-    let evaluation = 'uneval'
-    let solutionArr = solution.split('')
 
-    console.log(character+' '+evaluation+' '+userGuesses+' '+solutionArr);
+    console.log(character+' '+userGuesses+' '+solution.split(''));
     
     if (userGuesses.toString().split('').includes(character)) {
         console.log('Correct or present or absent');
         
         
-        if (solutionArr.includes(character)) {
+        if (solution.split('').includes(character)) {
             console.log('correct or present');
             
             for (let i = 0; i < userGuesses.length; i++) {
 
-                let guess = userGuesses[i].split('');
-
-                for (let j = 0; j < guess.length; j++) {
+                for (let j = 0; j < userGuesses[i].split('').length; j++) {
                     console.log(j);
 
-                    if (character === guess[j] && character === solutionArr[j]) {
-                        console.log('correct '+evaluation+' '+character+' '+guess[j]+' '+solutionArr[j])
-                        evaluation = 'correct';
-                    }
-                    else if (evaluation !== 'correct') {
-                        console.log('present '+evaluation+' '+character+' '+guess[j]+' '+solutionArr[j])
-                        evaluation = 'present';
+                    if (character === userGuesses[i].split('')[j] && character === solution.split('')[j]) {
+                        console.log('correct '+character+' '+userGuesses[i].split('')[j]+' '+solution.split('')[j])
+                        return 'correct';
                     }
                 }
             }
-            console.log(evaluation+' '+character);
-            return evaluation;
+            return 'present';
         }
-        else {
-            evaluation = 'absent';
-        }
+        return 'absent';
     }
-    console.log(evaluation+' '+character)
-    return evaluation;
 }
 
 console.log(getStatus(character));
